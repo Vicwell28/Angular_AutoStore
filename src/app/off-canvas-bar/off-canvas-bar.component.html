@@ -5,11 +5,16 @@
     </div>
     <div id="canvasOff2" class="offcanvas-body text-dark">
       <div>
-        imagen
+        <img src="../../assets/img/user.png" class="img-thumbnail" alt="...">
       </div>
-      <div class="d-grid gap-2">
-        <button class="btn btn-outline-dark" type="button">Iniciar Sesion</button>
-        <button class="btn btn-outline-dark" type="button">Registrarse</button>
+      <div class="text-center m-5">
+        Username: {{ Username }}
+      </div>
+      <div *ngIf="!UserActivo">
+        <div class="d-grid gap-2">
+          <button class="btn btn-outline-dark" type="button" routerLink="../login">Iniciar Sesion</button>
+          <button class="btn btn-outline-dark" type="button" routerLink="../registrar">Registrarse</button>
+        </div>
       </div>
     </div>
   </div>

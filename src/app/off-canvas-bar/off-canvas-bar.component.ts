@@ -12,4 +12,10 @@ export class OffCanvasBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  Username : string = "null"; 
+
+  UserId : number = 0; 
+
+  UserActivo : boolean = false; 
+
 }
