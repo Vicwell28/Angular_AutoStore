@@ -7,8 +7,8 @@
       <div>
         <img src="../../assets/img/user.png" class="img-thumbnail" alt="...">
       </div>
-      <div class="text-center m-5">
-        Username: {{ Username }}
+      <div class="text-center m-5" *ngIf="Username">
+        Bienvendio: {{ Username }}
       </div>
       <div *ngIf="!UserActivo">
         <div class="d-grid gap-2">
@@ -16,5 +16,19 @@
           <button class="btn btn-outline-dark" type="button" routerLink="../registrar">Registrarse</button>
         </div>
       </div>
+
+      <div *ngIf="UserActivo">
+        <div class="d-grid gap-2 mt-4">
+          <button class="btn btn-outline-dark" type="button" routerLink="../registrar" (click)="sesionCerrar()">Cerrar Sesion</button>
+        </div>
+        <div class="d-grid gap-2 mt-4">
+          <button class="btn btn-outline-dark" type="button" [routerLink]="['../carrito-compra/', UserId]">Carrito De Compras</button>
+        </div>
+      </div>
+
+
+
     </div>
   </div>
+  {{setDatos()}}
+

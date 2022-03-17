@@ -21,22 +21,39 @@ export class LoginComponent implements OnInit {
 
   errorStatus : boolean = false; 
   errorMsg : string = '';
+  //DATOS USUARIO
+  idUser = "";
+  userName = "";
 
   ngOnInit(): void {
   }
 
   onLogin(form : LoginI){
     //console.log(form); 
-    this.api.loginOn(form).subscribe(data => {
-      console.log(data); 
-      let datosResponse : ResponseI = data;
+    this.api.loginOn(form).subscribe(datas => {
+      console.log(datas); 
+      let datosResponse : ResponseI = datas;
+      console.log("Valores");
+      console.log(datosResponse.status);
       if(datosResponse.status){
-        localStorage.setItem("Token", datosResponse.message.token );
-        this.router.navigate(['/']);
+        //console.log(datosResponse.data.token); 
+        this.api.UsusarioActivo = true; 
+        localStorage.setItem("Token", datosResponse.data.token);
+        this.api.sacarUser(form.email).subscribe(datas => {
+          console.log(datas);
+          this.api.idUser = datas.data.id;
+          console.log(this.api.idUser); 
+          this.api.sacarUserAll(this.api.idUser).subscribe(datos => {
+            this.api.userName = datos.data.username;
+            console.log(this.api.userName);
+          })
+        }); 
+        //SI TODO SALE BIEN OBJETONGO EL TOKEN, CAMBIO VARIABLE COMO USUARIO ACTIVO, Y OBTENGO LOS DATOS DEL USER.
+        this.router.navigate(['/home']);
       }
       else {
         this.errorStatus = true; 
-        if(data.message.responseText == "E_INVALID_AUTH_UID: User not found"){
+        if(datas.data.responseText == "E_INVALID_AUTH_UID: User not found"){
           this.errorMsg = "Usuario No Encontrado";
         }
       }

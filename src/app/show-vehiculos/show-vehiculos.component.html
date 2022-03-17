@@ -38,12 +38,13 @@
               
                   <div *ngFor="let vehiculo of VehiculosDos.data" class="col-md-4">
                     <div class="card" style="width: 18rem;">
-                        <img src="../../assets/img/110879.jpg" class="img-thumbnail" alt="...">
+                        <img src="../../assets/img/auto.png" class="img-thumbnail" alt="...">
                         <div class="card-body">
                           <h5 class="card-title">
                               <div class="row">
                             <div class="col-12 text-truncate">
                               {{  vehiculo.Modelo.Marca.nombre_marca }}
+                              {{  vehiculo.Modelo.nombre_modelo }}
                             </div>
                           </div></h5>
                           <p class="card-text">

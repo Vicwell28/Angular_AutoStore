@@ -38,7 +38,7 @@ export class RegistrarseComponent implements OnInit {
          let datosResponse : ResponseI = data; 
          console.log(datosResponse); 
          
-         if(datosResponse.status == "Satifactorio. Creaste un User nuevo."){
+         if(datosResponse.status){
            //SI TODO SALE BIEN LO VA A MANDAR AL LOGIN PARA QUE INICIE SESION Y LE REGRESE EL TOKEN
            this.router.navigate(["../login"]);
          }

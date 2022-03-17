@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms'
-import { HttpClientModule } from '@angular/common/http' 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http' 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -20,6 +20,9 @@ import { RegistrarseComponent } from './vistas/registrarse/registrarse.component
 import { DashboardComponent } from './vistas/dashboard/dashboard.component';
 import { EditarComponent } from './vistas/editar/editar.component';
 import { DetallesVehiculoComponent } from './detalles-vehiculo/detalles-vehiculo.component';
+import { AuthInterceptor } from './servicios/auth-interceptor';
+import { CarritoCompraComponent } from './vistas/carrito-compra/carrito-compra.component';
+import { CompraClientComponent } from './compra-client/compra-client.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,9 @@ import { DetallesVehiculoComponent } from './detalles-vehiculo/detalles-vehiculo
     RegistrarseComponent,
     DashboardComponent,
     EditarComponent,
-    DetallesVehiculoComponent
+    DetallesVehiculoComponent,
+    CarritoCompraComponent,
+    CompraClientComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +54,13 @@ import { DetallesVehiculoComponent } from './detalles-vehiculo/detalles-vehiculo
     HttpClientModule,
   
   ],
-  providers: [],
+  providers: [
+    {
+      provide : HTTP_INTERCEPTORS, 
+      useClass : AuthInterceptor, 
+      multi : true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
